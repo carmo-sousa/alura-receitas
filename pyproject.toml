@@ -10,6 +10,7 @@ packages = [{include = "curso_django"}]
 python = "^3.10"
 Django = "^4.1.2"
 psycopg2-binary = "^2.9.4"
+gunicorn = "^20.1.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
