@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-jlgkj_qcb=h#8ho*k(0d^3l!0ygl-lj&6k(^a75ftf4qtfkr)j"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ DATABASES = {
         "NAME": "alurareceitas",
         "USER": "metatron",
         "PASSWORD": "199718",
-        "HOST": "localhost",
+        "HOST": "db",
         "PORT": "5432",
     }
 }
