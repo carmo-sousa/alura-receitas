@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-jlgkj_qcb=h#8ho*k(0d^3l!0ygl-lj&6k(^a75ftf4qtfkr)j"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -82,7 +82,7 @@ DATABASES = {
         "NAME": "alurareceitas",
         "USER": "metatron",
         "PASSWORD": "199718",
-        "HOST": "db",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
@@ -122,11 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / "static"
-STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "alurareceita/static",
-]
+STATIC_URL = "https://metatron-assets.s3.sa-east-1.amazonaws.com/static/"
+# STATICFILES_DIRS = [
+#     "https://metatron-assets.s3.sa-east-1.amazonaws.com/"
+#     # BASE_DIR / "static",
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
