@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-jlgkj_qcb=h#8ho*k(0d^3l!0ygl-lj&6k(^a75ftf4qtfkr)j"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "alurareceita.urls"
@@ -83,7 +84,7 @@ DATABASES = {
         "NAME": "alurareceitas",
         "USER": "metatron",
         "PASSWORD": "199718",
-        "HOST": "db",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
