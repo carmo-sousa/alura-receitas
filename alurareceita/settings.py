@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-jlgkj_qcb=h#8ho*k(0d^3l!0ygl-lj&6k(^a75ftf4qtfkr)j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
@@ -124,11 +124,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "https://metatron-assets.s3.sa-east-1.amazonaws.com/static/"
-# STATICFILES_DIRS = [
-#     "https://metatron-assets.s3.sa-east-1.amazonaws.com/"
-#     # BASE_DIR / "static",
-# ]
+STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

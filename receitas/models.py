@@ -12,3 +12,10 @@ class Receita(models.Model):
 
     def __str__(self):
         return self.nome_receita
+
+
+class Classe(models.Model):
+    nome = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.nome

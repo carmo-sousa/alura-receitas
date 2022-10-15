@@ -6,10 +6,10 @@ services:
     build: .
     restart: always
     ports:
-      - "80:8000"
+      - "8000:8000"
     volumes:
       - .:/app
-    command: "gunicorn -b 0.0.0.0:8000 alurareceita.wsgi"
+    command: "python manage.py runserver"
     depends_on:
       - db
 
