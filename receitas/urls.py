@@ -5,4 +5,5 @@ from receitas import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("<int:id_receita>", views.receitas, name="receita"),
+    path("buscar", views.buscar, name="buscar"),
 ]

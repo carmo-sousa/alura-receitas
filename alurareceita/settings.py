@@ -31,7 +31,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = [
-    "receitas",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    "receitas",
+    "pessoas",
 ]
 
 MIDDLEWARE = [
@@ -129,6 +130,9 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "alurareceita/static",
 ]
+
+MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -1,12 +1,12 @@
-from typing import Sequence
-
 from django.contrib import admin
 
 from receitas.models import Classe, Receita
 
 
 class AdminReceitas(admin.ModelAdmin):
-    search_fields: Sequence[str] = ("nome_receita",)
+    list_display = ("nome_receita", "publicada")
+    list_editable = ("publicada",)
+    search_fields = ("nome_receita", "categoria")
     list_filter = ("categoria",)
     list_per_page: int = 25
 
