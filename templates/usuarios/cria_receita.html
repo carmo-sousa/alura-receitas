@@ -1,0 +1,62 @@
+<h1>Pagina para criar receitas</h1>
+
+<!-- Formulário para criar as receitas -->
+<form action="{% url 'cria.receita' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="nome_receita">Nome da receita</label>
+    <input
+      type="text"
+      class="form-control"
+      id="nome_receita"
+      name="nome_receita"
+      placeholder="Nome da receita"
+    />
+  </div>
+  <div class="form-group">
+    <label for="ingredientes">Ingredientes</label>
+    <textarea
+      class="form-control"
+      id="ingredientes"
+      name="ingredientes"
+      rows="3"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="modo_preparo">Modo de preparo</label>
+    <textarea
+      class="form-control"
+      id="modo_preparo"
+      name="modo_preparo"
+      rows="3"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="tempo_preparo">Tempo de preparo</label>
+    <input
+      type="text"
+      class="form-control"
+      id="tempo_preparo"
+      name="tempo_preparo"
+      placeholder="Tempo de preparo"
+    />
+  </div>
+  <div class="form-group">
+    <label for="rendimento">Rendimento</label>
+    <input
+      type="text"
+      class="form-control"
+      id="rendimento"
+      name="rendimento"
+      placeholder="Rendimento"
+    />
+  </div>
+  <div class="form-group">
+    <label for="categoria">Categoria</label>
+    <select class="form-control" id="categoria" name="categoria">
+      <option value="1">Salgada</option>
+      <option value="2">Doce</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
