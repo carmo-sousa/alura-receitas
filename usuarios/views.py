@@ -8,6 +8,7 @@ from django.views import View
 from receitas.models import Receita
 
 
+# TODO: Trocar todos os prints por messages do django.
 def cadastro(request):
     if request.method == "POST":
         nome = request.POST["nome"]
