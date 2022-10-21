@@ -5,14 +5,9 @@
   <img src="{% static 'img/core-img/pizza.png' %}" alt="" />
 </div>
 
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% include 'partials/busca.html' %} 
+{% if messages %} {% for message in messages %}
+<div id="liveAlertPlaceholder" class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+{% endfor %} {% endif %} {% include 'partials/busca.html' %}
 {% include 'partials/menu.html' %}
 
 <!-- ##### Contact Form Area Start ##### -->
@@ -39,6 +34,7 @@
                   class="form-control"
                   name="email"
                   placeholder="Entre com o email cadastrado"
+                  required
                 />
               </div>
               <div class="col-12 col-lg-12">
@@ -49,6 +45,7 @@
                   class="form-control"
                   name="senha"
                   placeholder="Digite aqui sua senha"
+                  required
                 />
               </div>
               <div class="col-12 text-center">

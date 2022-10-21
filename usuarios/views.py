@@ -1,10 +1,9 @@
-from django.views import View
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import Http404, HttpResponse
-from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views import View
 
 from receitas.models import Receita
 
@@ -42,10 +41,13 @@ def cadastro(request):
     return render(request, "usuarios/cadastro.html")
 
 
-def login(request):
-    if request.method == "POST":
-        email = request.POST["email"]
-        senha = request.POST["senha"]
+class LoginView(View):
+    def get(self, request):
+        return render(request, "usuarios/login.html")
+
+    def post(self, request):
+        email: str = request.POST["email"]
+        senha: str = request.POST["senha"]
 
         try:
             user = get_object_or_404(User, email=email)
@@ -53,21 +55,26 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 return redirect("dashboard")
+            else:
+                messages.add_message(
+                    request, messages.ERROR, "Usuário ou senha incorretos!"
+                )
+                return redirect(to="login")
         except Http404:
-            messages.add_message(request, messages.ERROR, "Usuário nao encontrado!")
+            messages.add_message(
+                request, messages.ERROR, "Usuário ou senha incorretos!"
+            )
             return redirect(to="login")
-    return render(request, "usuarios/login.html")
 
 
 @login_required(login_url="login")
 def dashboard(request):
-    receitas = get_list_or_404(Receita, pessoa=request.user.id)
+    receitas = Receita.objects.filter(pessoa=request.user.id).order_by("-data_receita")
     return render(request, "usuarios/dashboard.html", {"receitas": receitas})
 
 
 def logout(request):
     if request.user.is_authenticated:
-        # Logout
         auth.logout(request)
         return redirect(to="index")
     return redirect(to="index")
@@ -78,4 +85,23 @@ class CriaReceita(View):
         return render(request, "usuarios/cria_receita.html")
 
     def post(self, request):
-        return HttpResponse("Receita criada!")
+        nome_receita = request.POST["nome_receita"]
+        ingredientes = request.POST["ingredientes"]
+        modo_preparo = request.POST["modo_preparo"]
+        tempo_preparo = request.POST["tempo_preparo"]
+        rendimento = request.POST["rendimento"]
+        categoria = request.POST["categoria"]
+        foto_receita = request.FILES["foto_receita"]
+
+        receita = Receita(
+            nome_receita=nome_receita,
+            ingredientes=ingredientes,
+            modo_preparo=modo_preparo,
+            tempo_preparo=tempo_preparo,
+            rendimento=rendimento,
+            categoria=categoria,
+            foto_receita=foto_receita,
+            pessoa=request.user,
+        )
+        receita.save()
+        return redirect("cria.receita")
