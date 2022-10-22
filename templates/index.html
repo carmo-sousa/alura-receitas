@@ -3,8 +3,8 @@
 {% block content %}
 <!-- Preloader -->
 <div id="preloader">
-    <i class="circle-preloader"></i>
-    <img src="{% static 'img/core-img/pizza.png' %}" alt="">
+  <i class="circle-preloader"></i>
+  <img src="{% static 'img/core-img/pizza.png' %}" alt="">
 </div>
 
 {% include 'partials/busca.html' %}
@@ -13,34 +13,69 @@
 
 <!-- ##### Best Receipe Area Start ##### -->
 <section class="best-receipe-area">
-    <div class="container">
-        <div class="row">
-            {% if receitas %}
-                {% for receita in receitas %}
-                <!-- Single Best Receipe Area -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-best-receipe-area mb-30">
-                        {% if not receita.foto_receita %}
-                            <img src="{% static 'img/bg-img/foto_receita.png' %}" width="350px", height="352px" alt="">
-                        {% else %}
-                            <img src="{{ receita.foto_receita.url }}" style="width: 350px; height: 352px;" alt="">
-                        {% endif %}
-                        <div class="receipe-content">
-                            <a href="{% url 'receita' receita.id %}">
-                                <h5>{{receita.nome_receita}}</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            {% else %}
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <p>Nenhuma receita encontrada</p>
-                </div>
-            {% endif %}
+  <div class="container">
+    <div class="row">
+      {% if receitas %}
+      {% for receita in receitas %}
+      <!-- Single Best Receipe Area -->
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="single-best-receipe-area mb-30">
+          {% if not receita.foto_receita %}
+          <img src="{% static 'img/bg-img/foto_receita.png' %}" width="350px" , height="352px" alt="">
+          {% else %}
+          <img src="{{ receita.foto_receita.url }}" style="width: 350px; height: 352px;" alt="">
+          {% endif %}
+          <div class="receipe-content">
+            <a href="{% url 'receita' receita.id %}">
+              <h5>{{receita.nome_receita}}</h5>
+            </a>
+          </div>
         </div>
+      </div>
+      {% endfor %}
+      <!-- ##### Pagination ##### -->
+      <section class="top-catagory-area section-padding-20-0">
+        <div class="container">
+
+          <ul class="pagination">
+
+            <li class="page-item">
+              <a href="" class="page-link">&laquo;</a>
+            </li>
+
+            <li class="page-item disabled">
+              <a class="page-link">&laquo;</a>
+            </li>
+
+            <li class="page-item active">
+              <a class="page-link"></a>
+            </li>
+
+            <li class="page-item">
+              <a href="" class="page-link"></a>
+            </li>
+
+            <li class="page-item">
+              <a href="" class="page-link">&raquo;</a>
+            </li>
+
+            <li class="page-item disabled">
+              <a class="page-link">&raquo;</a>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
+      <!-- ##### Pagination End ##### -->
+      {% else %}
+      <div class="col-12 col-sm-6 col-lg-4">
+        <p>Nenhuma receita encontrada</p>
+      </div>
+      {% endif %}
     </div>
+  </div>
 </section>
 <!-- ##### Best Receipe Area End ##### -->
-    {% include 'partials/footer.html' %}
+{% include 'partials/footer.html' %}
 {% endblock %}
