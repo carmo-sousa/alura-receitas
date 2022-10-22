@@ -22,6 +22,9 @@
 <!-- ##### Best Receipe Area Start ##### -->
 <section class="best-receipe-area">
   <div class="container">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+    {% endfor %} {% endif %}
     <div class="row">
       {% if receitas %} {% for receita in receitas %}
       <!-- Single Best Receipe Area -->
@@ -46,6 +49,18 @@
             <a href="{% url 'receita' receita.id %}">
               <h5>{{receita.nome_receita}}</h5>
             </a>
+            <a
+              class="btn btn-warning"
+              role="button"
+              href="{% url 'editar' receita.id %}"
+              >Editar</a
+            >
+            <a
+              class="btn btn-danger"
+              role="button"
+              href="{% url 'deleta' receita.id %}"
+              >Deletar</a
+            >
           </div>
         </div>
       </div>

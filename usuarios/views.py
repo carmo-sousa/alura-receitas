@@ -81,6 +81,20 @@ def logout(request):
     return redirect(to="index")
 
 
+# TODO: Modificar o HTML para que ele mostre um modal com uma confirmação antes de deletar a receita.
+class DeletaReceita(View):
+    def get(self, request, id_receita):
+        receita = get_object_or_404(Receita, pk=id_receita)
+
+        if request.user == receita.pessoa:
+            receita.delete()
+            messages.success(request, "Receita deletada!")
+            return redirect(to="dashboard")
+        else:
+            messages.error(request, "Nao foi possível deletar a receita")
+            redirect(to="dashboard")
+
+
 class CriaReceita(View):
     def get(self, request):
         return render(request, "usuarios/cria_receita.html")
@@ -106,3 +120,32 @@ class CriaReceita(View):
         )
         receita.save()
         return redirect("cria.receita")
+
+
+class EditaReceita(View):
+    def get(self, request, id_receita):
+        receita = get_object_or_404(Receita, pk=id_receita)
+        return render(request, "usuarios/editar_receita.html", {"receita": receita})
+
+    def post(self, request, id_receita):
+        nome_receita = request.POST["nome_receita"]
+        ingredientes = request.POST["ingredientes"]
+        modo_preparo = request.POST["modo_preparo"]
+        tempo_preparo = request.POST["tempo_preparo"]
+        rendimento = request.POST["rendimento"]
+        categoria = request.POST["categoria"]
+
+        receita = get_object_or_404(Receita, pk=id_receita)
+
+        receita.nome_receita = nome_receita
+        receita.ingredientes = ingredientes
+        receita.modo_preparo = modo_preparo
+        receita.tempo_preparo = tempo_preparo
+        receita.rendimento = rendimento
+        receita.categoria = categoria
+        if "foto_receita" in request.FILES:
+            receita.foto_receita = request.FILES["foto_receita"]
+        receita.save()
+
+        messages.success(request, f"Receita {id_receita} editada com sucesso!")
+        return redirect(to="dashboard")
