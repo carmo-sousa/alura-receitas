@@ -7,9 +7,9 @@
   <img src="{% static 'img/core-img/pizza.png' %}" alt="">
 </div>
 
-{% include 'partials/busca.html' %}
+{% include 'partials/_busca.html' %}
 
-{% include 'partials/menu.html' %}
+{% include 'partials/_menu.html' %}
 
 <!-- ##### Best Receipe Area Start ##### -->
 <section class="best-receipe-area">
@@ -26,7 +26,7 @@
           <img src="{{ receita.foto_receita.url }}" style="width: 350px; height: 352px;" alt="">
           {% endif %}
           <div class="receipe-content">
-            <a href="{% url 'receita' receita.id %}">
+            <a href="{% url 'receitas:receita' receita.id %}">
               <h5>{{receita.nome_receita}}</h5>
             </a>
           </div>
@@ -77,5 +77,5 @@
   </div>
 </section>
 <!-- ##### Best Receipe Area End ##### -->
-{% include 'partials/footer.html' %}
+{% include 'partials/_footer.html' %}
 {% endblock %}
