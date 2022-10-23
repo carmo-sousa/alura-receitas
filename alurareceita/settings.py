@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import sys
 
 from django.contrib.messages import constants as messages
 
@@ -145,6 +144,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 MESSAGE_TAGS = {messages.ERROR: "danger", messages.SUCCESS: "success"}
-
-# Adicionado o diretório de apps no path
-sys.path.insert(0, BASE_DIR.parent / "apps")

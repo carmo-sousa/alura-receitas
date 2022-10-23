@@ -25,3 +25,7 @@ def buscar(request):
     if pesquisa:
         receitas = Receita.objects.filter(nome_receita__icontains=pesquisa)
     return render(request, "buscar.html", {"receitas": receitas})
+
+
+def error404(request, exception):
+    return render(request, "404.html")
