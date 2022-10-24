@@ -33,6 +33,11 @@
         </div>
       </div>
       {% endfor %}
+      {% else %}
+      <div class="col-12 col-sm-6 col-lg-4">
+        <p>Nenhuma receita encontrada</p>
+      </div>
+      {% endif %}
       <!-- ##### Pagination ##### -->
       <section class="top-catagory-area section-padding-20-0">
         <div class="container">
@@ -68,11 +73,6 @@
         </div>
       </section>
       <!-- ##### Pagination End ##### -->
-      {% else %}
-      <div class="col-12 col-sm-6 col-lg-4">
-        <p>Nenhuma receita encontrada</p>
-      </div>
-      {% endif %}
     </div>
   </div>
 </section>

@@ -40,7 +40,7 @@
         {% if not receita.foto_receita %}
         <img src="{% static 'img/bg-img/tomate_banner.jpg' %}">
         {% else %}
-        <img src="{{ receita.foto_receita.url }}" style="max-height: 346px;">
+        <img src="{{ receita.foto_receita.url }}">
         {% endif %}
       </div>
     </div>
