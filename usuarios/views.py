@@ -1,6 +1,7 @@
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
@@ -71,7 +72,10 @@ class LoginView(View):
 @login_required(login_url="login")
 def dashboard(request):
     receitas = Receita.objects.filter(pessoa=request.user.id).order_by("-data_receita")
-    return render(request, "usuarios/dashboard.html", {"receitas": receitas})
+    paginator = Paginator(receitas, 10)
+    page = request.GET.get("page")
+    receitas_por_pagina = paginator.get_page(page)
+    return render(request, "usuarios/dashboard.html", {"receitas": receitas_por_pagina})
 
 
 def logout(request):
