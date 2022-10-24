@@ -5,7 +5,7 @@
   <img src="{% static 'img/core-img/pizza.png' %}" alt="" />
 </div>
 
-{% include 'partials/busca.html' %} {% include 'partials/menu.html' %}
+{% include 'partials/_busca.html' %} {% include 'partials/_menu.html' %}
 
 <div class="contact-area section-padding-0-80">
   <div class="container">
@@ -31,36 +31,16 @@
       <div class="col-12 col-sm-6 col-lg-4">
         <div class="single-best-receipe-area mb-30">
           {% if not receita.foto_receita %}
-          <img
-            src="{% static 'img/bg-img/foto_receita.png' %}"
-            width="350px"
-            ,
-            height="352px"
-            alt=""
-          />
+          <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="" />
           {% else %}
-          <img
-            src="{{ receita.foto_receita.url }}"
-            style="width: 350px; height: 352px"
-            alt=""
-          />
+          <img src="{{ receita.foto_receita.url }}" alt="" />
           {% endif %}
           <div class="receipe-content">
-            <a href="{% url 'receita' receita.id %}">
+            <a href="{% url 'receitas:detalhe' receita.id %}">
               <h5>{{receita.nome_receita}}</h5>
             </a>
-            <a
-              class="btn btn-warning"
-              role="button"
-              href="{% url 'editar' receita.id %}"
-              >Editar</a
-            >
-            <a
-              class="btn btn-danger"
-              role="button"
-              href="{% url 'deleta' receita.id %}"
-              >Deletar</a
-            >
+            <a class="btn btn-warning" role="button" href="{% url 'receitas:editar' receita.id %}">Editar</a>
+            <a class="btn btn-danger" role="button" href="{% url 'receitas:deletar' receita.id %}">Deletar</a>
           </div>
         </div>
       </div>
@@ -73,4 +53,43 @@
   </div>
 </section>
 <!-- ##### Best Receipe Area End ##### -->
-{% include 'partials/footer.html' %} {% endblock %}
+<!-- ##### Pagination ##### -->
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if receitas.has_other_pages %}
+    {% if receitas.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ receitas.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="?page={{ page. }}"> <span aria-hidden="true">&laquo;</span> </a>
+    </li>
+    {% endif %}
+
+    {% for page in receitas.paginator.page_range %}
+    {% if page == receitas.number %}
+    <li class="page-item active">
+      <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+    </li>
+    {% else %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+
+    {% if not receitas.has_next %}
+    <li class="page-item disabled">
+      <a class="page-link"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    {% else %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ receitas.next_page_number }}"> <span aria-hidden="true">&raquo;</span> </a>
+    </li>
+    {% endif %}
+    {% endif %}
+  </ul>
+</nav>
+<!-- ##### Pagination End ##### -->
+{% include 'partials/_footer.html' %} {% endblock %}

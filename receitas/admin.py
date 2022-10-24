@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from receitas.models import Classe, Receita
+from receitas.models import Categoria, Receita
 
 
 class AdminReceitas(admin.ModelAdmin):
@@ -12,4 +12,4 @@ class AdminReceitas(admin.ModelAdmin):
 
 
 admin.site.register(Receita, AdminReceitas)
-admin.site.register(Classe)
+admin.site.register(Categoria)

@@ -11,7 +11,7 @@
   <img src="{% static 'img/core-img/pizza.png' %}" alt="" />
 </div>
 
-{% include 'partials/busca.html' %} {% include 'partials/menu.html' %}
+{% include 'partials/_busca.html' %} {% include 'partials/_menu.html' %}
 
 <!-- ##### Contact Form Area Start ##### -->
 <div class="contact-area section-padding-0-80">
@@ -28,84 +28,49 @@
       <div class="col-12">
         <p>Todos os campos são obrigatórios</p>
         <div class="contact-form-area">
-          <form
-            action="{% url 'cria.receita' %}"
-            method="post"
-            enctype="multipart/form-data"
-          >
+          <form action="{% url 'receitas:criar' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
               <div class="col-12 col-lg-12">
                 <label for="nome_receita"><b>Título da receita</b></label>
-                <input
-                  type="text"
-                  id="nome_receita"
-                  class="form-control"
-                  name="nome_receita"
-                  placeholder="Ex. Suco de limão"
-                  required
-                />
+                <input type="text" id="nome_receita" class="form-control" name="nome_receita"
+                  placeholder="Ex. Suco de limão" required />
               </div>
               <div class="col-12">
                 <label for="file"><b>Ingredientes</b></label>
-                <textarea
-                  class="form-control"
-                  name="ingredientes"
-                  cols="30"
-                  rows="10"
-                  placeholder="Ex. 2 Limões &#10;200ml de água"
-                  required
-                ></textarea>
+                <textarea class="form-control" name="ingredientes" cols="30" rows="10"
+                  placeholder="Ex. 2 Limões &#10;200ml de água" required></textarea>
               </div>
               <div class="col-12">
                 <label for="file"><b>Modo de preparo</b></label>
-                <textarea
-                  class="form-control"
-                  name="modo_preparo"
-                  cols="30"
-                  rows="10"
+                <textarea class="form-control" name="modo_preparo" cols="30" rows="10"
                   placeholder="Ex. Corte o limão com cuidado e exprema no copo  &#10;Misture com a água e sirva."
-                  required
-                ></textarea>
+                  required></textarea>
               </div>
               <div class="col-12 col-lg-3">
                 <label for="file"><b>Tempo de preparo (minutos)</b></label>
-                <input
-                  type="number"
-                  class="form-control"
-                  name="tempo_preparo"
-                  placeholder="Ex. 2"
-                  required
-                />
+                <input type="number" class="form-control" name="tempo_preparo" placeholder="Ex. 2" required />
               </div>
               <div class="col-12 col-lg-3">
                 <label for="file"><b>Rendimento</b></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="rendimento"
-                  placeholder="Ex. serve 1 pessoa"
-                  required
-                />
+                <input type="text" class="form-control" name="rendimento" placeholder="Ex. serve 1 pessoa" required />
               </div>
               <div class="col-12 col-lg-3">
                 <label for="file"><b>Categoria da receita</b></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="categoria"
-                  placeholder="Ex. Sucos e bebidas"
-                  required
-                />
+                <!-- <input type="text" class="form-control" name="categoria" placeholder="Ex. Sucos e bebidas" required /> -->
+                <select class="form-select" aria-label="Default select example" name="categoria">
+                  <option selected>Escolha uma categoria</option>
+                  {% if categorias %}
+                  {% for categoria in categorias %}
+                  <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                  {% endfor %}
+                  {% endif %}
+                </select>
+
               </div>
               <div class="col-12 col-lg-3">
                 <label for="file"><b>Foto</b></label>
-                <input
-                  type="file"
-                  class="form-control"
-                  name="foto_receita"
-                  required
-                />
+                <input type="file" class="form-control" name="foto_receita" required />
               </div>
               <div class="col-12 text-center">
                 <button class="btn delicious-btn mt-30" type="submit">
@@ -120,4 +85,4 @@
   </div>
 </div>
 
-{% include 'partials/footer.html' %} {% endblock %}
+{% include 'partials/_footer.html' %} {% endblock %}
