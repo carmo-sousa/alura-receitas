@@ -1,6 +1,15 @@
 from django.contrib import admin
-from receitas.models import Receita
-from receitas.models import Classe
 
-admin.site.register(Receita)
-admin.site.register(Classe)
+from receitas.models import Categoria, Receita
+
+
+class AdminReceitas(admin.ModelAdmin):
+    list_display = ("nome_receita", "publicada")
+    list_editable = ("publicada",)
+    search_fields = ("nome_receita", "categoria")
+    list_filter = ("categoria",)
+    list_per_page: int = 25
+
+
+admin.site.register(Receita, AdminReceitas)
+admin.site.register(Categoria)
