@@ -7,7 +7,7 @@ from receitas.models import Categoria, Receita
 
 
 def index(request):
-    receitas = Receita.objects.order_by("-data_receita").filter(publicada=True)
+    receitas = Receita.objects.filter(publicada=True)
     paginator = Paginator(receitas, 10)
     page = request.GET.get("page")
     receitas_por_pagina = paginator.get_page(page)

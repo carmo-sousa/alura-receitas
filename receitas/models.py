@@ -23,3 +23,6 @@ class Receita(models.Model):
 
     def __str__(self):
         return self.nome_receita
+
+    class Meta:
+        ordering = ["-data_receita"]

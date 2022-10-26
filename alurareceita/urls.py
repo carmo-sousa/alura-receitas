@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("receitas/", include("receitas.urls")),
+    path("", include("receitas.urls")),
     path("usuarios/", include("usuarios.urls")),
+    path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
