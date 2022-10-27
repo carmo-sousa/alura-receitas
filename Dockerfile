@@ -18,4 +18,6 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
+RUN python manage.py collectstatic
+
 CMD [ "tail", "-f", "/dev/null" ]
